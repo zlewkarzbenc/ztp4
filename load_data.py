@@ -8,8 +8,8 @@ from datetime import datetime, timedelta
 
 # id archiwum dla poszczególnych lat
 gios_archive_url = "https://powietrze.gios.gov.pl/pjp/archives/downloadFile/"
-gios_url_ids = {2014: '302', 2019: '322', 2024: '582'}
-gios_pm25_file = {2014: '2014_PM2.5_1g.xlsx', 2019: '2019_PM25_1g.xlsx', 2024: '2024_PM25_1g.xlsx'}
+gios_url_ids = {2015: '236', 2018: '603', 2021: '486', 2024: '582'}
+gios_pm25_file = {2015: '2015_PM25_1g.xlsx', 2018: '2018_PM25_1g.xlsx', 2021: '2021_PM25_1g.xlsx', 2024: '2024_PM25_1g.xlsx'}
 
 # funkcja do ściągania podanego archiwum
 def download_gios_archive(year, gios_id, filename):
@@ -32,8 +32,8 @@ def download_gios_archive(year, gios_id, filename):
                     print(f"Błąd przy wczytywaniu {year}: {e}")
     return df
 
-# pobranie danych z podanych lat: 2014, 2019 i 2024
-years = [2014, 2019, 2024]
+# pobranie danych z podanych lat: 2015, 2018, 2021 i 2024
+years = [2015, 2018, 2021, 2024]
 dataframes = {}
 for year in years:
     try:
@@ -69,7 +69,7 @@ except Exception as e:
 
 # ujednolicenie formatów dataframes z róźnych lat
 for key, df in dataframes.items():
-    if key == 2014:
+    if key < 2016:
         df = df[2:]
         df = df.reset_index(drop=True)
     else:
@@ -125,7 +125,7 @@ def change_midnight(df):
     df = df.copy()
     df['Kod stacji'] = pd.to_datetime(df['Kod stacji'])
     time = df['Kod stacji'].dt.hour == 0
-    df.loc[time, 'Kod stacji'] = df.loc[time, 'Kod stacji'] - pd.Timedelta(seconds=1)
+    df.loc[time, 'Kod stacji'] = df.loc[time, 'Kod stacji'] - pd.Timedelta(minutes=5)
 
     return df
 
