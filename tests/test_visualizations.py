@@ -1,5 +1,7 @@
 from visualizations import *
 import pytest
+import pandas as pd
+from compute_averages import count_days_over_treshold
 
 @pytest.fixture(scope="session")
 def monthly_df():
