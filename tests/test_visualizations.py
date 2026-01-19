@@ -4,6 +4,7 @@ import pandas as pd
 from compute_averages import count_days_over_treshold
 
 
+# przykładowe dane
 @pytest.fixture(scope="session")
 def monthly_df():
    df = pd.DataFrame({"year": [2015, 2018, 2018, 2021],
@@ -32,6 +33,7 @@ def test_heatmap_run_without_err(monthly_df):
    assert fig is not None
 
 
+# czy wszystkie lokalizacje zostaly zawarte w heatmapie
 def test_heatmap_contains_all_locations(monthly_df):
    locations = [c for c in monthly_df.columns if c not in ["year", "month"]]
    fig = heatmaps(monthly_df)
@@ -44,6 +46,7 @@ def test_city_trends_run_without_err(monthly_df):
    assert fig is not None
 
 
+# czy legenda jest poprawna
 def test_city_trends_legend_labels(monthly_df):
     df = monthly_df.set_index(["year", "month"])
     ax = plot_city_trends(df, cities=["Warszawa", "Katowice"], years=[2015, 2018], ylim=[0, 75])
@@ -52,6 +55,7 @@ def test_city_trends_legend_labels(monthly_df):
     assert "Katowice 2018" in labels
 
 
+# czy liczba linii na wykresie jest poprawna
 def test_city_trends_num_lines(monthly_df):
     df = monthly_df.set_index(["year", "month"])
     ax = plot_city_trends(df, cities=["Warszawa", "Katowice"], years=[2015, 2018], ylim=[0, 75])
@@ -65,6 +69,7 @@ def test_pm25_exceedance_run_without_err(data):
     assert fig is not None
 
 
+# czy liczba słupków na wykresie jest równa temu ile powinno ich być
 def test_pm25_exceedance_bar_count(data):
     exceedance_counts = count_days_over_treshold(data, treshold=15)
     ax = plot_pm25_exceedance_bars(exceedance_counts, top_n=1, base_year=2015, threshold=15)
@@ -81,6 +86,7 @@ def test_pm25_exceedance_bar_count(data):
     assert out_bars == expected_bars
    
 
+# czy jest tyle stacji na wykresie ile powinno być
 def test_pm25_exceedance_station_count(data):
     exceedance_counts = count_days_over_treshold(data, treshold=15)
     fig = plot_pm25_exceedance_bars(exceedance_counts, top_n=1, base_year=2015, threshold=15)
