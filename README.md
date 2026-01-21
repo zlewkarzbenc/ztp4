@@ -48,3 +48,8 @@ jupyter notebook
 ---------
 
 ### Autorzy: Aleksander Janowiak, Dominika Aniszewska
+
+---------
+
+#### Niespodzianka dla pary 17
+Pomiary uśredniane są najpierw wewnątrz stacji, a w danych GIOS występują brakujące wartości co oznacza, że niektóre stacje mają danej doby mniej pomiarów niż inne. Przez to, poszczególne pomiary nie są traktowane równocennie. Brakujących wartości nie jest bardzo dużo, ale jest ich wystarczająco by metoda uśredniania wpływała na końcowy wykres.
