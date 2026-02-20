@@ -19,6 +19,7 @@ def test_normalize_pubmed_record_basic():
     assert normalized["journal"] == "Journal of Testing"
     assert normalized["authors"] == "Smith J; Doe A"
 
+
 # Testy dla przypadków z brakującymi polami
 def test_normalize_pubmed_record_missing_fields():
     record = {
