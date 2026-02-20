@@ -5,7 +5,7 @@ import io
 import re
 
 """
-data_loader.py
+load_data.py
 --------------
 Moduł obsłukuje wczytywanie danych i przygotowuje je do dalszej analizy 
 

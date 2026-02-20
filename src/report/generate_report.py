@@ -74,7 +74,7 @@ def main():
 
     #### Section 2) Monthly averages ####
     out.append("## Średnie miesięczne:\n")
-    # For each year, include monthly means and plots
+    # For each year, in clude monthly means and plots
     for y in years:
         out.append(f"### Rok {y}\n")
         monthly = pd.read_csv(f"results/pm25/{y}/monthly_means.csv", header=[0, 1])
@@ -99,12 +99,6 @@ def main():
         journals = pd.read_csv(f"results/literature/{y}/top_journals.csv")
 
         out.append(f"**Liczba publikacji dla zapytania:** {len(papers)}\n")
-
-        out.append("#### Trend liczby publikacji (wg roku publikacji)\n")
-        out.append(summary.to_markdown(index=False))
-        out.append("\n")
-
-        out.append(f"![Liczba publikacji wg roku](literature/{y}/papers_by_year.png)\n")
 
         out.append("#### Najczęściej występujące czasopisma\n")
         out.append(journals.to_markdown(index=False))

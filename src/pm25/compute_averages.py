@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 
 """
-average_and_limits.py
+compute_averages.py
 --------------
 Moduł służy do obliczania średnich czasowych wartości PM2.5 oraz zliczania liczby dni z przekroczeniem normy
 jakości powietrza. 

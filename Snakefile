@@ -17,7 +17,7 @@ rule pm25_metrics:
         norm=config["pm25"]["daily_norm"]
     shell:
         """
-        python src/pm25/running_pm25.py \
+        python src/pm25/run_analysis.py \
             --year {wildcards.year} \
             --daily_norm {params.norm} \
             --cities {params.cities} \

@@ -27,7 +27,7 @@ snakemake --cores 1
 ```
 Pipeline:
 
-- uruchamia kod running_pm25.py dla lat 2021 i 2024
+- uruchamia kod run_analysis.py dla lat 2021 i 2024
 - uruchamia kod pubmed_fetch.py dla lat 2021 i 2024
 - uruchamia kod generate_report.py i generuje raport dla {2021, 2024}
 
@@ -42,7 +42,7 @@ Uruchamia:
 - `snakemake -s Snakefile_task4 --cores 1`
 
 Pipeline:
-- uruchamia kod `running_pm25.py` dla roku 2019; 2024 zostaje pominięty
+- uruchamia kod `run_analysis.py` dla roku 2019; 2024 zostaje pominięty
 - uruchamia kod `pubmed_fetch.py` dla roku 2019; 2024 zostaje pominięty
 - uruchamia kod `generate_report.py` i generuje raport dla {2019, 2024}
 
@@ -87,7 +87,7 @@ Folder config zawiera plik task4.yaml. Są tam parametry do podania przez użytk
 
 Folder src zawiera kody źródłowe podzielone na 3 części: literature, pm25 i report.
 
--Podfolder pm25 zawiera pliki powstałe dla zadań 1 i 3 (`average_and_limits.py`, `data_loader.py` i `visualizations.py`) oraz `running_pm25.py` zawierający kod, który używa funkcji z reszty plików w sposób potrzebny do odecnego zadania.
+-Podfolder pm25 zawiera pliki powstałe dla zadań 1 i 3 (`compute_averages.py`, `load_data.py` i `visualizations.py`) oraz `run_analysis.py` zawierający kod, który używa funkcji z reszty plików w sposób potrzebny do odecnego zadania.
 
 -Podfolder literature zawiera plik `pubmed_fetch.py` pobierający dane z bazy danych PubMed.
 

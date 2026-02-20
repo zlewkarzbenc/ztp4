@@ -2,7 +2,7 @@ import argparse
 from pathlib import Path
 import matplotlib.pyplot as plt
 
-from data_loader import (
+from load_data import (
     download_multiple_gios_archives,
     edit_df,
     download_gios_metadata,
@@ -11,7 +11,7 @@ from data_loader import (
     correct_datetime_index
 )
 
-from average_and_limits import find_above_norm, monthly_mean
+from compute_averages import find_above_norm, monthly_mean
 from visualizations import plot_average, bar_plots
 
 def main(year, daily_norm, cities, outdir):

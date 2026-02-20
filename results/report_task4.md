@@ -164,18 +164,6 @@ Liczba dni w roku, w których średnie dobowe stężenie PM2.5 przekroczyło obo
 
 **Liczba publikacji dla zapytania:** 86
 
-#### Trend liczby publikacji (wg roku publikacji)
-
-|   year |   n_papers |
-|-------:|-----------:|
-|   2019 |         76 |
-|   2020 |          8 |
-|   2021 |          1 |
-|   2023 |          1 |
-
-
-![Liczba publikacji wg roku](literature/2019/papers_by_year.png)
-
 #### Najczęściej występujące czasopisma
 
 | n_papers                                                                |   count |
@@ -204,16 +192,6 @@ Liczba dni w roku, w których średnie dobowe stężenie PM2.5 przekroczyło obo
 ### Rok 2024
 
 **Liczba publikacji dla zapytania:** 104
-
-#### Trend liczby publikacji (wg roku publikacji)
-
-|   year |   n_papers |
-|-------:|-----------:|
-|   2024 |        103 |
-|   2025 |          1 |
-
-
-![Liczba publikacji wg roku](literature/2024/papers_by_year.png)
 
 #### Najczęściej występujące czasopisma
 

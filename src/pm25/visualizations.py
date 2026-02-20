@@ -10,39 +10,94 @@ Zawiera funkcje do generowania wykresów liniowych, map ciepła (heatmaps)
 oraz zestawień słupkowych dla wybranych stacji pomiarowych.
 
 """
+# def plot_average(monthly_df_grouped, years, cities, show=True):
+#     """
+#         Funkcja rysująca wykres liniowy pokazujący trend średnich miesięcznych wartości PM2.5 dla wybranych lat i miast  
+
+#     Args:
+#         monthly_df_grouped (pd.DataFrame): Zgrupowana po miastach ramka danych z uśrednionymi miesięcznymi wartościami PM2.5 
+#         years (list[int]): lista lat które będą analizowane  
+#         cities(list[str]): lista analizowanych miast 
+   
+#     Returns:
+#         None
+#     """
+#     # średnie dla stacji
+#     colors = plt.cm.Set1.colors
+#     color_index = 0
+
+#     df = monthly_df_grouped[cities]
+    
+#     for year in years:
+#         df_year = df.loc[year]
+#         for city in cities:
+#             plt.plot(range(1,13), df_year[city], label=f'{city} {year}', marker='o', color=colors[color_index])
+#             color_index += 1
+
+#     plt.xlabel('Miesiąc')
+#     plt.xticks(range(1,13))
+#     plt.ylabel('Średni poziom PM2.5')
+#     plt.title(f'Średni miesięczny poziom PM2.5\n w miastach: {", ".join(cities)} w latach: {", ".join(map(str, years))}')
+#     plt.legend()
+#     plt.tight_layout()
+#     if show:
+#         plt.show()
+#     return 
 def plot_average(monthly_df_grouped, years, cities, show=True):
     """
-        Funkcja rysująca wykres liniowy pokazujący trend średnich miesięcznych wartości PM2.5 dla wybranych lat i miast  
+    Funkcja rysująca wykres liniowy pokazujący trend średnich miesięcznych
+    wartości PM2.5 dla wybranych lat i miast.
 
-    Args:
-        monthly_df_grouped (pd.DataFrame): Zgrupowana po miastach ramka danych z uśrednionymi miesięcznymi wartościami PM2.5 
-        years (list[int]): lista lat które będą analizowane  
-        cities(list[str]): lista analizowanych miast 
-   
-    Returns:
-        None
+    (Drop-in replacement – zmieniony tylko styl.)
     """
-    # średnie dla stacji
-    colors = plt.cm.Set1.colors
+
+    import seaborn as sns
+    import matplotlib.pyplot as plt
+
+    # styl seaborn (jak w starej funkcji)
+    sns.set_style("whitegrid")
+
+    colors = sns.color_palette("coolwarm", len(years) * len(cities))
     color_index = 0
 
     df = monthly_df_grouped[cities]
-    
+
+    fig, ax = plt.subplots(figsize=(12, 6))
+
     for year in years:
         df_year = df.loc[year]
         for city in cities:
-            plt.plot(range(1,13), df_year[city], label=f'{city} {year}', marker='o', color=colors[color_index])
+            ax.plot(
+                range(1, 13),
+                df_year[city],
+                label=f"{city} {year}",
+                marker="o",
+                linewidth=2,
+                alpha=0.9,
+                color=colors[color_index],
+            )
             color_index += 1
 
-    plt.xlabel('Miesiąc')
-    plt.xticks(range(1,13))
-    plt.ylabel('Średni poziom PM2.5')
-    plt.title(f'Średni miesięczny poziom PM2.5\n w miastach: {", ".join(cities)} w latach: {", ".join(map(str, years))}')
-    plt.legend()
-    plt.tight_layout()
+    ax.set_xlabel("Miesiąc")
+    ax.set_ylabel("PM2.5 (µg/m³)")
+    ax.set_xticks(range(1, 13))
+    ax.set_xlim(1, 12)
+
+    ax.set_title(
+        f"Średni miesięczny poziom PM2.5\n"
+        f"{', '.join(cities)} | {', '.join(map(str, years))}",
+        fontsize=13
+    )
+
+    ax.grid(alpha=0.35)
+    ax.legend(frameon=False)
+
+    fig.tight_layout()
+
     if show:
         plt.show()
-    return 
+
+    return
 
 def bar_plots(norms_df, year, show=True):
     """
