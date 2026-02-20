@@ -23,7 +23,7 @@ def plot_average(monthly_df_grouped, years, cities, show=True):
         None
     """
     # średnie dla stacji
-    colors = plt.cm.Set2.colors
+    colors = plt.cm.Set1.colors
     color_index = 0
 
     df = monthly_df_grouped[cities]
@@ -43,53 +43,6 @@ def plot_average(monthly_df_grouped, years, cities, show=True):
     if show:
         plt.show()
     return 
-
-def heatmaps(monthly_df_grouped, show=True):
-    """
-        Funkcja rysująca heatmapy średnich miesięcznych wartości PM2.5 dla wszystkich miast
-    
-    Args:
-        monthly_df_grouped (DataFrame): Zgrupowana po misatach ramka danych z uśrednionymi wartościami PM2.5 po wszytkich stacjach z danego miasta 
-    
-    Returns:
-        None
-    """
-    # lista miast
-    cities = [c for c in monthly_df_grouped.columns if c not in ['miesiąc', 'rok']]
-    n = len(cities)
-
-    # siatka podwykresów
-    cols = 4
-    rows = int(np.ceil(n / cols))
-
-    fig, axes = plt.subplots(rows, cols, figsize=(6 * cols, 6 * rows))
-    axes = axes.flatten()
-
-    for ax, city in zip(axes, cities):
-        
-        # średnie wartości miesięczne dla miasta 
-        city_data = monthly_df_grouped[city]
-        city_data = city_data.reset_index()
-        city_data.columns = ['rok', 'miesiąc', 'PM2.5']
-        city_data['PM2.5'] = pd.to_numeric(city_data['PM2.5'])
-
-        df_pivot = city_data.pivot(index='rok', columns='miesiąc', values='PM2.5')
-
-        sns.heatmap(df_pivot, cmap='YlOrRd', ax=ax)
-        ax.set_title(f'{city} - średnie miesięczne PM2.5')
-        ax.set_xlabel('Miesiąc')
-        ax.set_ylabel('Rok')
-
-    # Jeśli zostały puste osie, wyłączamy je
-    for ax in axes[n:]:
-        ax.axis("off")
-
-    plt.tight_layout()
-    if show:
-        plt.show()
-    return
-
-
 
 def bar_plots(norms_df, year, show=True):
     """
@@ -119,7 +72,7 @@ def bar_plots(norms_df, year, show=True):
 
     # wykres
     plt.figure(figsize=(10, 6))
-    sns.barplot(data=plot_df, x='miasto_stacja', y='liczba_dni', hue='rok', palette='Pastel2')
+    sns.barplot(data=plot_df, x='miasto_stacja', y='liczba_dni', hue='rok', palette='viridis')
     plt.xticks(rotation=45)
     plt.ylabel('Liczba dni z przekroczeniem normy')
     plt.title('Dni z przekroczeniem normy PM2.5 dla wybranych stacji')
@@ -128,23 +81,6 @@ def bar_plots(norms_df, year, show=True):
     if show:
         plt.show()  
     return 
-
-
-#wizualizacja do zad. 5 z województwami:
-def plot_voivodeship_exceedances(voiv_df, years=(2015, 2018, 2021, 2024), figsize=(12, 6), show=True):
-    """
-    Wykres słupkowy: liczba dni, w których średnia dobowa PM2.5 w województwie (średnia po stacjach) przekroczyła normę.
-    """
-    years = [y for y in years if y in voiv_df.columns]
-    df = voiv_df[years]
-    ax = df.plot(kind="bar", figsize=figsize)
-    ax.set_title("Liczba dni z przekroczeniem normy PM2.5 dla średniej dobowej województwa")
-    ax.set_xlabel("Województwo")
-    ax.set_ylabel("Liczba dni z przekroczeniem")
-    ax.legend(title="Rok", loc="center left", bbox_to_anchor=(1.02, 0.5))
-    plt.tight_layout()
-    if show:    
-        plt.show()
     
 if __name__ == "__main__":
     pass
